@@ -60,11 +60,11 @@ export default function SignIn() {
           <form className='flex flex-col gap-4'  onSubmit={handleSubmit}>
             <div className='flex flex-col'>
               <label htmlFor="email">Your Email</label>
-              <input type="email" placeholder='name@gmail.com' id='email' onChange={handleChange}  className='border-1 w-70 h-8 bg-gray-100 rounded-sm px-2'/>
+              <input type="email" placeholder='name@gmail.com' id='email' onChange={handleChange}  className='border-1 w-70 h-8 bg-gray-100 dark:bg-gray-700 rounded-sm px-2'/>
             </div>
             <div className='flex flex-col'>
               <label htmlFor="password">Your Password</label>
-              <input type="password" placeholder='**********' id='password'  onChange={handleChange} className='border-1 w-70 h-8 bg-gray-100 rounded-sm px-2'/>
+              <input type="password" placeholder='**********' id='password'  onChange={handleChange} className='border-1 w-70 h-8 bg-gray-100 dark:bg-gray-700 rounded-sm px-2'/>
             </div>
             <div className='pl-25'>
               <button type='submit' className='bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500 rounded-sm text-white w-20 h-8 cursor-pointer hover:from-indigo-600 hover:via-purple-600 hover:to-pink-600 ' disabled={loading}>

@@ -99,7 +99,7 @@ export default function DashPosts() {
               ))}
             </tbody>
           </table>
-          {showMore && <button className=' bg-gray-100 w-full text-teal-500 px-4 py-2 mt-4 self-center cursor-pointer hover:text-teal-600' onClick={fetchPosts}>Show more</button>}
+          {showMore && <button className=' bg-gray-100 dark:bg-gray-700 w-full text-teal-500 px-4 py-2 mt-4 self-center cursor-pointer hover:text-teal-600' onClick={fetchPosts}>Show more</button>}
         </div>
       ) : (
         <div className="text-center text-gray-500 mt-4">
@@ -108,7 +108,7 @@ export default function DashPosts() {
       )}
 
        {showModal && <div className='bg-black/50 fixed top-0 left-0 w-full h-screen flex justify-center items-center text-md' onClick={()=>setShowModal(false)}>
-                <div className='bg-white p-5 rounded-md w-90 h-60 flex flex-col justify-center items-center 'onClick={(e)=>e.stopPropagation()}>
+                <div className='bg-white dark:bg-gray-700 p-5 rounded-md w-90 h-60 flex flex-col justify-center items-center 'onClick={(e)=>e.stopPropagation()}>
                   <HiOutlineExclamationCircle className='text-gray-400 dark:text-gray-200 w-20 h-20'/>
                   <div className='text-center text-xl'>Are you sure you want to delete this post?</div>
                   <div className='flex justify-center gap-10 item-center w-full mt-5'> 

@@ -39,7 +39,7 @@ export default function OAuth() {
   return (
     <div>
         <div className='inline-block rounded-md bg-gradient-to-r from-pink-500 to-orange-500 p-[2px]'>
-            <button type='button' className='flex w-70 box-border items-center gap-2 bg-white hover:bg-gradient-to-r from-pink-400 to-orange-400 p-2  rounded-md font-semibold' onClick={handleGoogleClick}>
+            <button type='button' className='flex w-70 box-border items-center gap-2 bg-white hover:bg-gradient-to-r from-pink-500 to-orange-500 p-2  rounded-md font-semibold dark:bg-gradient-to-r cursor-pointer hover:from-pink-600 hover:to-orange-600 ' onClick={handleGoogleClick}>
         <AiFillGoogleCircle className='w-6 h-6 mr-2 '/>
         Continue with Google
       </button></div>

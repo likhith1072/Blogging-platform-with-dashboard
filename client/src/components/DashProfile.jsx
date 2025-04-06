@@ -181,9 +181,9 @@ const handleSignout=async()=>{
       
           {imageFileUploadError && <div>{imageFileUploadError}</div>}
         
-        <input type="text" id="username" placeholder="username" defaultValue={currentUser.username} className='p-1 border-1 rounded-sm bg-gray-50' onChange={handleChange}/>
-        <input type="email" id="email" placeholder="email" defaultValue={currentUser.email}  className='p-1 border-1 rounded-sm bg-gray-50' onChange={handleChange}/>
-        <input type="password" id="password" placeholder="password" className='p-1 border-1 rounded-sm bg-gray-50'  onChange={handleChange}/>
+        <input type="text" id="username" placeholder="username" defaultValue={currentUser.username} className='p-1 border-1 rounded-sm bg-gray-50 dark:bg-gray-800' onChange={handleChange}/>
+        <input type="email" id="email" placeholder="email" defaultValue={currentUser.email}  className='p-1 border-1 rounded-sm bg-gray-50 dark:bg-gray-800' onChange={handleChange}/>
+        <input type="password" id="password" placeholder="password" className='p-1 border-1 rounded-sm bg-gray-50 dark:bg-gray-800'  onChange={handleChange}/>
         <button className='bg-gradient-to-r from-purple-400 to-blue-400 hover:from bg-purple-500 hover:to-blue-500 cursor-pointer rounded-sm' type="submit" disabled={loading || imageFileUploading}>{loading ? 'Loading..' : 'Update'}</button>
         {currentUser && currentUser.isAdmin && (
           <Link to='/create-post' className='bg-gradient-to-r from-purple-400 to-blue-400 hover:from bg-purple-500 hover:to-blue-500 rounded-sm'>
@@ -201,7 +201,7 @@ const handleSignout=async()=>{
         }
         {error && <div className='bg-red-100 text-red-400 rounded-sm p-2'>{error}</div>}
         {showModal && <div className='bg-black/50 fixed top-0 left-0 w-full h-screen flex justify-center items-center text-md' onClick={()=>setShowModal(false)}>
-          <div className='bg-white p-5 rounded-md w-90 h-60 flex flex-col justify-center items-center 'onClick={(e)=>e.stopPropagation()}>
+          <div className='bg-white dark:bg-gray-700 p-5 rounded-md w-90 h-60 flex flex-col justify-center items-center 'onClick={(e)=>e.stopPropagation()}>
             <HiOutlineExclamationCircle className='text-gray-400 dark:text-gray-200 w-20 h-20'/>
             <div className='text-center text-xl'>Are you sure you want to delete your account?</div>
             <div className='flex justify-center gap-10 item-center w-full mt-5'> 

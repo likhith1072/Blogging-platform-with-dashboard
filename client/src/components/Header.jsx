@@ -121,8 +121,8 @@ export default function Header() {
                              <div className='dark:hover:bg-gray-600 hover:bg-gray-300 w-full text-center py-1' onClick={handleSignout}><Link to="/signout">Sign out</Link></div>
                             </div>
                              
-                            </div>):(<Link to='/signin'>
-                            <div className=' h-10 w-20 bg-gradient-to-r from-purple-500 to-blue-500 hover:from-purple-600 hover:to-blue-600 border-1 rounded-md px-2 text-white text-sm sm:text-md font-semibold cursor-pointer flex justify-center items-center'>Sign In</div></Link>)
+                            </div>):(<Link to='/signin' className={`${isActive('/signin') && "hidden"}`}>
+                            <div className=' h-10 w-20  bg-gradient-to-r from-purple-500 to-blue-500 hover:from-purple-600 hover:to-blue-600 border-1 rounded-md px-2 text-white text-sm sm:text-md font-semibold cursor-pointer flex justify-center items-center'>Sign In</div></Link>)
                         }
                             
                         </div>
@@ -141,7 +141,7 @@ export default function Header() {
                     {/* Mobile Menu */}
                    
                      {isOpen && (
-                        <div className="lg:hidden px-4 py-2  border-2 border-gray-600  absolute top-0 w-full dark:bg-gray-800 bg-white">
+                        <div className="lg:hidden px-4 py-2  border-2 border-gray-600  absolute top-0 w-full dark:bg-gray-800 bg-white z-1">
                             <div className="pl-3 flex items-center ">
                                 <span className="text-xl font-semibold pr-2 pl-6">Menu </span>
                                 <button
@@ -156,7 +156,7 @@ export default function Header() {
                                     key={link.to}
                                     to={link.to}
                                     onClick={() => setIsOpen(false)} // Close menu on click
-                                    className={`block ${isActive(link.to) ? "text-indigo-600 font-semibold" : "text-gray-700 dark:text-gray-400  "} hover:text-indigo-500 pl-6 transition hover:bg-gray-200 dark:hover:bg-gray-600`}
+                                    className={`block ${isActive(link.to) ? "text-indigo-600 font-semibold" : "text-gray-700 dark:text-gray-400 p-1  "} hover:text-indigo-500 pl-6 transition hover:bg-gray-200 dark:hover:bg-gray-600`}
                                 >
                                     {link.name}
                                 </Link>
