@@ -127,6 +127,7 @@ export default function CreatePost() {
             <option value="reactjs">Reactjs</option>
             <option value="nextjs">Nextjs</option>
             <option value="Nodejs">Nodejs</option>
+            <option value="tailwindcss">Tailwindcss</option>
           </select>
         </div>
 
