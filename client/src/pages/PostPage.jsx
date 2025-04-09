@@ -63,7 +63,7 @@ export default function PostPage(){
    },[])
 
     if(loading) return (
-        <div className='flex justify-center items-center min-h-screen'> <FaSpinner
+        <div className='flex justify-center items-center min-h-screen w-full'> <FaSpinner
         className="animate-spin text-teal-500"
         size={50} // size in px
       /></div>)

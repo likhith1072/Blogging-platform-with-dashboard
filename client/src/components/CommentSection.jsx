@@ -93,18 +93,28 @@ export default function CommentSection({postId}) {
         navigate('/sign-in');
         return;
       }
-      const res=await fetch(`http://localhost:3000/api/comment/deleteComment/${commentToDelete}`,{
+      const res=await fetch(`http://localhost:3000/api/comment/deleteComment/${commentToDelete._id}`,{
         method:'DELETE',
         credentials:'include',
       });
       if(res.ok){
         const data=await res.json();
-        setComments(comments.filter(comment=>comment._id !== commentToDelete));
+        setComments(comments.filter(comment=>comment._id !== commentToDelete._id));
       }
     } catch (error) {
       console.log(error.message);
     }
   }
+
+  const handleReply = (parentId, newReply) => {
+    setComments((prev) => {
+      return prev.map((comment) =>
+        comment._id === parentId
+          ? { ...comment, replies: [...(comment.replies || []), newReply._id] }
+          : comment
+      );
+    });
+  };
 
   return (
     <div className='max-w-2xl mx-auto w-full p-3'>
@@ -151,13 +161,13 @@ export default function CommentSection({postId}) {
           comments.map(comment=>(
             <Comment key={comment._id} comment={comment} onLike={handleLike} onEdit={handleEdit} onDelete={(commentId)=>{
               setShowModal(true);
-              setCommentToDelete(commentId);
-            }}/>
+              setCommentToDelete(comment);
+            }} onReply={handleReply}/>
           )) }
         </>) 
         }
 
-         {showModal && <div className='bg-black/50 fixed top-0 left-0 w-full h-screen flex justify-center items-center text-md' onClick={()=>setShowModal(false)}>
+         {showModal && <div className='bg-black/50 z-4 fixed top-0 left-0 w-full h-screen flex justify-center items-center text-md' onClick={()=>setShowModal(false)}>
                         <div className='bg-white p-5 rounded-md w-90 h-60 flex flex-col justify-center items-center 'onClick={(e)=>e.stopPropagation()}>
                           <HiOutlineExclamationCircle className='text-gray-400 dark:text-gray-200 w-20 h-20'/>
                           <div className='text-center text-xl'>Are you sure you want to delete this comment?</div>

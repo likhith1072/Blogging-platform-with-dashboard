@@ -2,6 +2,7 @@ import {useSelector} from 'react-redux'
 import {useEffect,useState} from 'react';
 import {HiAnnotation, HiArrowNarrowRight, HiArrowNarrowUp, HiDocumentText, HiOutlineUserGroup} from 'react-icons/hi'
 import {Link} from 'react-router-dom'
+import { FaSpinner } from "react-icons/fa";
 
 export default function DashboardComp(){
     const [users,setUsers]=useState([]);
@@ -14,6 +15,9 @@ export default function DashboardComp(){
     const [lastMonthPosts,setLastMonthPosts]=useState(0);
     const [lastMonthComments,setLastMonthComments]=useState(0);
     const {currentUser}=useSelector((state)=>state.user)
+    const [loadingPosts,setLoadingPosts]=useState(true);
+    const [loadingComments,setLoadingComments]=useState(true);
+    const [loadingUsers,setLoadingUsers]=useState(true);
 
     useEffect(()=>{
       const fetchUsers =async()=>{
@@ -27,6 +31,7 @@ export default function DashboardComp(){
               setUsers(data.users); 
               setTotalUsers(data.totalUsers);
               setLastMonthUsers(data.lastMonthUsers);
+              setLoadingUsers(false);
             }
           } catch(error){
             console.log(error.message);
@@ -43,6 +48,7 @@ export default function DashboardComp(){
               setPosts(data.posts); 
               setTotalPosts(data.totalPosts);
               setLastMonthPosts(data.lastMonthPosts);
+              setLoadingPosts(false);
             }
           } catch(error){
             console.log(error.message);
@@ -59,6 +65,7 @@ export default function DashboardComp(){
               setComments(data.comments); 
               setTotalComments(data.totalComments);
               setLastMonthComments(data.lastMonthComments);
+              setLoadingComments(false);
             }
           } catch(error){
             console.log(error.message);
@@ -72,8 +79,16 @@ export default function DashboardComp(){
      
     },[currentUser])
 
+    if(loadingPosts || loadingUsers || loadingComments) return (
+         <div className='flex justify-center items-center min-h-screen w-full'> <FaSpinner
+         className="animate-spin text-teal-500"
+         size={50} 
+       /></div>)
+
     return (
-        <div className='p-3 md:mx-auto'>
+      <>
+      {!loadingPosts && !loadingUsers && !loadingComments &&
+               <div className='p-3 md:mx-auto transition-all duration-300'>
            <div className='flex flex-wrap justify-center items-center gap-4'>
             <div className='flex flex-col p-3 dark:bg-gray-slate-800 gap-4 md:w-72 w-60 rounded-md shadow-md'>
               <div className='flex justify-between items-center gap-5 '>
@@ -246,5 +261,7 @@ export default function DashboardComp(){
           </div>
          </div>
         </div>
+       }
+       </>
     )     
 }

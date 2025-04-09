@@ -9,6 +9,14 @@ const commentSchema = new mongoose.Schema({
         type:String,
         required:true,
     },
+    parentId: {
+        type: String,
+        default: null,
+      },
+    replies: {
+        type:Array,
+        default:[],
+    },
     userId:{
         type:String,
         required:true,

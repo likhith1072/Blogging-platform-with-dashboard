@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { HiOutlineExclamationCircle } from 'react-icons/hi';
 import { useSelector } from 'react-redux';
+import { FaSpinner } from "react-icons/fa";
 // import { Link } from 'react-router-dom';
 import { FaCheck, FaTimes } from 'react-icons/fa';
 
@@ -10,6 +11,7 @@ export default function DashUsers() {
   const [showMore, setShowMore] = useState(true);
   const [showModal,setShowModal]=useState(false);
   const [userIdToDelete,setUserIdToDelete]=useState('');
+  const [loading,setLoading]=useState(true);
 
   useEffect(() => {
     if (currentUser && currentUser.isAdmin) {
@@ -30,8 +32,10 @@ export default function DashUsers() {
         if(data.users.length<9){
           setShowMore(false);
         }
+        setLoading(false);
       }
     } catch(error){
+      setLoading(false);
       console.log(error.message);
     }
   }
@@ -53,6 +57,12 @@ export default function DashUsers() {
             console.log(error.message);
         }
     };
+
+    if(loading) return (
+      <div className='flex justify-center items-center min-h-screen w-full'> <FaSpinner
+      className="animate-spin text-teal-500"
+      size={50} // size in px
+    /></div>)
 
   return (
     <div className='table-auto overflow-x-scroll md:mx-auto p-3 scrollbar scrollbar-thumb-gray-500 scrollbar-track-gray-200  dark:text-gray-300'>

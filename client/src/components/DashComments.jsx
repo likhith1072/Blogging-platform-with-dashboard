@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { HiOutlineExclamationCircle } from 'react-icons/hi';
 import { useSelector } from 'react-redux';
 // import { Link } from 'react-router-dom';
-import { FaCheck, FaTimes } from 'react-icons/fa';
+import { FaCheck, FaTimes,FaSpinner } from 'react-icons/fa';
 
 export default function DashComments() {
   const { currentUser } = useSelector((state) => state.user);
@@ -10,6 +10,7 @@ export default function DashComments() {
   const [showMore, setShowMore] = useState(true);
   const [showModal,setShowModal]=useState(false);
   const [commentIdToDelete,setCommentIdToDelete]=useState('');
+  const [loading,setLoading]=useState(true);
 
   useEffect(() => {
     if (currentUser && currentUser.isAdmin) {
@@ -30,8 +31,10 @@ export default function DashComments() {
         if(data.comments.length<9){
           setShowMore(false);
         }
+        setLoading(false);
       }
     } catch(error){
+      setLoading(false);
       console.log(error.message);
     }
   }
@@ -54,6 +57,12 @@ export default function DashComments() {
             console.log(error.message);
         }
     };
+
+    if(loading) return (
+       <div className='flex justify-center items-center min-h-screen w-full'> <FaSpinner
+       className="animate-spin text-teal-500"
+       size={50} 
+     /></div>)
 
   return (
     <div className='table-auto overflow-x-scroll md:mx-auto p-3 scrollbar scrollbar-thumb-gray-500 scrollbar-track-gray-200  dark:text-gray-300'>
