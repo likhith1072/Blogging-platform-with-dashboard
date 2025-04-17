@@ -34,12 +34,12 @@ export default function ToolbarPlugin() {
   };
 
   return (
-    <div className="flex flex-wrap gap-2 mb-4 bg-gray-100 p-2 rounded-md shadow-sm">
+    <div className="flex flex-wrap gap-2 mb-4 bg-gray-100 dark:bg-gray-800 p-2 rounded-md shadow-sm">
       {/* ✅ Inline Formatting */}
       <button
         onClick={() => formatText("bold")}
         type="button"
-        className="btn-toolbar font-bold"
+        className="btn-toolbar font-bold "
         title="Bold"
       >
         B
@@ -47,7 +47,7 @@ export default function ToolbarPlugin() {
       <button
         onClick={() => formatText("italic")}
         type="button"
-        className="btn-toolbar italic"
+        className="btn-toolbar italic "
         title="Italic"
       >
         I
@@ -55,7 +55,7 @@ export default function ToolbarPlugin() {
       <button
         onClick={() => formatText("underline")}
         type="button"
-        className="btn-toolbar underline"
+        className="btn-toolbar underline "
         title="Underline"
       >
         U
@@ -63,7 +63,7 @@ export default function ToolbarPlugin() {
       <button
         onClick={() => formatText("strikethrough")}
         type="button"
-        className="btn-toolbar line-through"
+        className="btn-toolbar line-through "
         title="Strikethrough"
       >
         S
@@ -73,7 +73,7 @@ export default function ToolbarPlugin() {
       <button
         onClick={() => insertHeading("h1")}
         type="button"
-        className="btn-toolbar font-bold text-xl"
+        className="btn-toolbar font-bold text-xl "
         title="H1"
       >
         H1
@@ -81,7 +81,7 @@ export default function ToolbarPlugin() {
       <button
         onClick={() => insertHeading("h2")}
         type="button"
-        className="btn-toolbar font-bold text-lg"
+        className="btn-toolbar font-bold text-lg "
         title="H2"
       >
         H2
@@ -89,7 +89,7 @@ export default function ToolbarPlugin() {
       <button
         onClick={() => insertHeading("h3")}
         type="button"
-        className="btn-toolbar font-bold text-md"
+        className="btn-toolbar font-bold text-md "
         title="H3"
       >
         H3
@@ -99,7 +99,7 @@ export default function ToolbarPlugin() {
       <button
         onClick={() => editor.dispatchCommand(FORMAT_ELEMENT_COMMAND, "left")}
         type="button"
-        className="btn-toolbar"
+        className="btn-toolbar "
         title="Align Left"
       >
         ⬅️
@@ -107,7 +107,7 @@ export default function ToolbarPlugin() {
       <button
         onClick={() => editor.dispatchCommand(FORMAT_ELEMENT_COMMAND, "center")}
         type="button"
-        className="btn-toolbar"
+        className="btn-toolbar "
         title="Align Center"
       >
         ⏺️
@@ -115,7 +115,7 @@ export default function ToolbarPlugin() {
       <button
         onClick={() => editor.dispatchCommand(FORMAT_ELEMENT_COMMAND, "right")}
         type="button"
-        className="btn-toolbar"
+        className="btn-toolbar "
         title="Align Right"
       >
         ➡️

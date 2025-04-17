@@ -36,6 +36,7 @@
     "react-lorem-ipsum": "^1.4.10",
     "react-redux": "^9.2.0",
     "react-router-dom": "^7.3.0",
+    "react-toastify": "^11.0.5",
     "redux-persist": "^6.0.0",
     "tailwindcss": "^4.0.13"
   },

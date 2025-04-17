@@ -15,14 +15,20 @@ import UpdatePost from './pages/UpdatePost';
 import PostPage from './pages/PostPage'
 import ScrollToTop from './components/ScrollToTop';
 import Search from './pages/Search'
+import VerifyEmail from './pages/VerifyEmail'
+import { ToastContainer} from 'react-toastify';
+import ResetPassword from './pages/ResetPassword'
+
 
 export default function App() {
   return (
     <BrowserRouter>
+      <ToastContainer />    
       <ScrollToTop/>
       <Header />
       <Routes>
         <Route path="/" element={<Home />} />
+        <Route path="/verify-email" element={<VerifyEmail />} />
         <Route path="/about" element={<About />} />   
         <Route path="/search" element={<Search />} />
         <Route element={<PrivateRoute/>}> 
@@ -35,6 +41,7 @@ export default function App() {
         <Route path="/projects" element={<Projects />} />
         <Route path="/signin" element={<SignIn />} />
         <Route path="/signup" element={<SignUp />} /> 
+        <Route path="/reset-password" element={<ResetPassword />} /> 
         <Route path="/post/:postSlug" element={<PostPage />} />
       </Routes>
       <Footer/>

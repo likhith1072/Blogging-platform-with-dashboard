@@ -54,9 +54,9 @@ function CustomEditor({ initialContent,onChange }) {
 
   return (
     <LexicalComposer initialConfig={editorConfig}>
-      <div className="border border-gray-300 rounded-lg p-4 bg-white shadow-sm">
+      <div className="border border-gray-300 rounded-lg p-4 bg-white dark:bg-gray-800 dark:border-gray-600 shadow-sm">
         <ToolbarPlugin />
-        <div className="min-h-[300px] p-3 border border-gray-200 rounded-lg bg-gray-50 outline-none focus:ring-2 focus:ring-blue-300">
+        <div className="min-h-[300px] p-3 border border-gray-200 rounded-lg bg-gray-50 dark:bg-gray-800 dark:border-gray-600 outline-none focus:ring-2 focus:ring-blue-300">
           <RichTextPlugin
             contentEditable={
               <ContentEditable className="editor-input min-h-[300px] w-full outline-none bg-transparent" />

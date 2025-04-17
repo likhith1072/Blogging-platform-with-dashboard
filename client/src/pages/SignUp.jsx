@@ -1,9 +1,14 @@
 import React from 'react'
 import { Link,useNavigate } from 'react-router-dom'
 import { useState } from 'react'
+import { signInStart,signInSuccess,signInFailure} from '../redux/user/userSlice';
+import { useSelector,useDispatch } from 'react-redux';
 import OAuth from '../components/OAuth';
+import { toast } from 'react-toastify';
+
 
 export default function SignUp() {
+  const dispatch=useDispatch();
   const [formData,setFormData]=useState({});
   const [errorMessage,setErrorMessage]=useState(null);
   const [loading,setLoading]=useState(false);
@@ -32,13 +37,35 @@ export default function SignUp() {
       const data=await res.json();
       if(data.success== false){
         setLoading(false);
+        toast.error(data.message);
         return setErrorMessage(data.message);
       }
-      setLoading(false);
+      
       if(res.ok){
-        navigate('/signin');
+        const re=await fetch('http://localhost:3000/api/auth/send-verify-otp',{
+          method:'POST',
+          headers:{
+            'Content-Type':
+            'application/json',
+          },
+          credentials: 'include', 
+          body:JSON.stringify({email:formData.email}),
+        });
+        const otpsend=await re.json();
+        if(otpsend.success){
+          setLoading(false);
+          navigate('/verify-email', {
+            state: { email: formData.email }
+          });
+        }
+        else{
+          setLoading(false);
+          return setErrorMessage(otpsend.message);
+        }
+       
       }
     } catch(error){
+      toast.error(error.message);
       setErrorMessage(error.message);
       setLoading(false);
     }
@@ -58,7 +85,7 @@ export default function SignUp() {
         </div>
         {/* right */}
         <div className='flex-1'>
-          <form className='flex flex-col gap-4'  onSubmit={handleSubmit}>
+          <form className='flex flex-col gap-3'  onSubmit={handleSubmit}>
             <div className='flex flex-col'>
               <label htmlFor="username">Your username</label>
               <input type="text" placeholder='Username' id='username'  onChange={handleChange} className='border-1 w-70 h-8 bg-gray-100 dark:bg-gray-700 rounded-sm px-2'/>
@@ -71,6 +98,7 @@ export default function SignUp() {
               <label htmlFor="password">Your Password</label>
               <input type="password" placeholder='Password' id='password'  onChange={handleChange} className='border-1 w-70 h-8 bg-gray-100 dark:bg-gray-700 rounded-sm px-2'/>
             </div>
+            <Link to ='/reset-password' className='text-blue-500 hover:text-blue-700'>Forget Password?</Link>
             <div className='pl-25'>
               <button type='submit' className='bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500 rounded-sm text-white w-20 h-8 cursor-pointer hover:from-indigo-600 hover:via-purple-600 hover:to-pink-600 ' disabled={loading}>
                 {loading ? (<>
@@ -83,7 +111,7 @@ export default function SignUp() {
             <span>Have an account?</span>
             <Link to ='/signin' className='text-blue-500 hover:text-blue-700'>Sign In</Link>
             </div>
-            {errorMessage && <div className='text-red-500  bg-red-100 flex justify-center items-center rounded-md w-70 mt-2 p-2'>{errorMessage}</div>}
+            {/* {errorMessage && <div className='text-red-500  bg-red-100 flex justify-center items-center rounded-md w-70 mt-2 p-2'>{errorMessage}</div>} */}
         </div>
       </div>
     </div>

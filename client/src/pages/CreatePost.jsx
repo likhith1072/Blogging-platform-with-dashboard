@@ -110,7 +110,7 @@ export default function CreatePost() {
             placeholder="Title"
             required
             id="title"
-            className="flex-1 border border-gray-500 bg-gray-100 rounded-sm p-2"
+            className="flex-1 border border-gray-500 bg-gray-100 rounded-sm p-2 dark:bg-gray-600"
             onChange={(e) => {
               setFormData({ ...formData, title: e.target.value });
             }}
@@ -120,7 +120,7 @@ export default function CreatePost() {
             onChange={(e) => {
               setFormData({ ...formData, category: e.target.value });
             }}
-            className="p-2 border rounded-sm bg-gray-50"
+            className="p-2 border dark:border-gray-800 rounded-sm bg-gray-50 dark:bg-gray-600"
           >
             <option value="Uncategorized">Select Category</option>
             <option value="javascript">Javascript</option>
@@ -147,17 +147,17 @@ export default function CreatePost() {
             >
               Choose File
             </label>
-            <span className="text-gray-600 w-40 truncate">{fileName}</span>
+            <span className="text-gray-600 w-40 truncate dark:text-gray-300">{fileName}</span>
           </div>
           {/* Upload Button */}
           <button
             type="button"
-            className="cursor-pointer border rounded p-1 font-semibold bg-green-500 hover:bg-green-600 text-white"
+            className="cursor-pointer borderdark:border-gray-800 rounded p-1 font-semibold bg-green-500 hover:bg-green-600 text-white dark:bg-green-600 dark:hover:bg-green-700"
             onClick={handleUploadImage}
             disabled={imageUploadProgress}
           >
             {imageUploadProgress ? (
-              <div className="w-16 h-16 bg-white">
+              <div className="w-16 h-16 bg-white dark:bg-gray-700 text-gray-300">
                 <CircularProgressbar
                   value={imageUploadProgress}
                   text={`${imageUploadProgress || 0}%`}
@@ -184,14 +184,14 @@ export default function CreatePost() {
         )}
 
         {/* Lexical Editor Section */}
-        <div className="border p-3 min-h-[300px] bg-white shadow-sm">
+        <div className="border dark:border-gray-800  min-h-[300px] bg-white shadow-sm dark:bg-gray-700 dark:rounded-md">
           <CustomEditor onChange={handleEditorChange} />
         </div>
 
         {/* Submit Button */}
         <button
           type="submit"
-          className="cursor-pointer border rounded p-2 font-semibold bg-gradient-to-r from-purple-500 to-pink-500 hover:from-purple-600 hover:to-pink-600 text-white"
+          className="cursor-pointer border dark:border-gray-800 rounded p-2 font-semibold bg-gradient-to-r from-purple-500 to-purple-600 hover:from-purple-600 hover:to-purple-700 dark:from-purple-600 dark:to-purple-700 dark:hover:from-purple-700  dark:hover:to-purple-800 text-grey-300"
         >
           Publish
         </button>

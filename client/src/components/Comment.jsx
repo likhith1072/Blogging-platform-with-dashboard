@@ -94,9 +94,7 @@ const [replies, setReplies] = useState([]);
           setReplyContent('');
           setShowReplyBox(false);
           onReply(comment._id, data); // update parent in CommentSection
-          // setReplies((prev) => [...prev, data]); // add reply to the replies state
-          // fetchReplies(); 
-          setReplies((prev) => [...prev, data]); 
+          setReplies((prev) => [...prev, data]);  // add reply to the replies state
           setNoOfReplies((prev) => prev + 1); 
 
         }

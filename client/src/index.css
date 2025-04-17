@@ -4,7 +4,7 @@
 
 /* Editor button styles */
 .btn-toolbar {
-    @apply px-3 py-1 bg-white border border-gray-300 rounded-md shadow-sm text-sm font-medium hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-blue-300;
+    @apply px-3 py-1 bg-white dark:bg-gray-600 border border-gray-300 dark:border-gray-700 dark:text-gray-200  cursor-pointer rounded-md shadow-sm text-sm font-medium hover:bg-gray-100 dark:hover:bg-gray-600 focus:outline-none focus:ring-2 focus:ring-blue-300;
   }
   
 .post-content p{

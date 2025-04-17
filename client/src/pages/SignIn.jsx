@@ -4,10 +4,12 @@ import { useState } from 'react'
 import { signInStart,signInSuccess,signInFailure} from '../redux/user/userSlice';
 import { useSelector,useDispatch } from 'react-redux';
 import OAuth from '../components/OAuth';
+import { toast } from 'react-toastify';
 
 export default function SignIn() {
   const dispatch=useDispatch();
-  const {loading,error:errorMessage}=useSelector((state)=>state.user);
+  const [errorMessage,setErrorMessage]=useState(null);
+  const [loading,setLoading]=useState(false);
   const [formData,setFormData]=useState({});
   const navigate=useNavigate();
   const handleChange =(e)=>{
@@ -20,7 +22,7 @@ export default function SignIn() {
       return dispatch(signInFailure('Please fill out all fields.'));
     }
     try{
-      dispatch(signInStart());
+      setLoading(true);
       const res=await fetch('http://localhost:3000/api/auth/signin',{
         method:'POST',
         headers:{
@@ -32,13 +34,42 @@ export default function SignIn() {
       });
       const data=await res.json();
       if(data.success== false){
-       return dispatch(signInFailure(data.message));
+        setLoading(false);
+        toast.error(data.message);
+        return setErrorMessage(data.message);
       }
+      
+      if(data.success === 'verify'){
+        const re=await fetch('http://localhost:3000/api/auth/send-verify-otp',{
+          method:'POST',
+          headers:{
+            'Content-Type':
+            'application/json',
+          },
+          credentials: 'include', 
+          body:JSON.stringify({email:formData.email}),
+        });
+        const otpsend=await re.json();
+        if(otpsend.success){
+          setLoading(false);
+         return navigate('/verify-email', {
+            state: { email: formData.email }
+          });
+        }
+        else{
+          setLoading(false);
+          toast.error(otpsend.message);
+          return setErrorMessage(otpsend.message);
+        }
+      }
+
       if(res.ok){
         dispatch(signInSuccess(data));
+        setLoading(false);
         navigate('/');
       }
     } catch(error){
+       toast.error(error.message);
        dispatch(signInFailure(error.message));
     }
 
@@ -57,7 +88,7 @@ export default function SignIn() {
         </div>
         {/* right */}
         <div className='flex-1'>
-          <form className='flex flex-col gap-4'  onSubmit={handleSubmit}>
+          <form className='flex flex-col gap-3'  onSubmit={handleSubmit}>
             <div className='flex flex-col'>
               <label htmlFor="email">Your Email</label>
               <input type="email" placeholder='name@gmail.com' id='email' onChange={handleChange}  className='border-1 w-70 h-8 bg-gray-100 dark:bg-gray-700 rounded-sm px-2'/>
@@ -66,6 +97,7 @@ export default function SignIn() {
               <label htmlFor="password">Your Password</label>
               <input type="password" placeholder='**********' id='password'  onChange={handleChange} className='border-1 w-70 h-8 bg-gray-100 dark:bg-gray-700 rounded-sm px-2'/>
             </div>
+            <Link to ='/reset-password' className='text-blue-500 hover:text-blue-700'>Forget Password?</Link>
             <div className='pl-25'>
               <button type='submit' className='bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500 rounded-sm text-white w-20 h-8 cursor-pointer hover:from-indigo-600 hover:via-purple-600 hover:to-pink-600 ' disabled={loading}>
                 {loading ? (<>
@@ -78,7 +110,7 @@ export default function SignIn() {
             <span>Don't Have an account?</span>
             <Link to ='/signup' className='text-blue-500 hover:text-blue-700'>Sign up</Link>
             </div>
-            {errorMessage && <div className='text-red-500  bg-red-100 flex justify-center items-center rounded-md w-70 mt-2 p-2'>{errorMessage}</div>}
+            {/* {errorMessage && <div className='text-red-500  bg-red-100 flex justify-center items-center rounded-md w-70 mt-2 p-2'>{errorMessage}</div>} */}
            </div>
          </div>
     </div>
