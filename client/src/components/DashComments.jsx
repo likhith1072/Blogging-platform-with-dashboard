@@ -106,7 +106,7 @@ export default function DashComments() {
               ))}
             </tbody>
           </table>
-          {showMore && <button className=' bg-gray-100 w-full text-teal-500 px-4 py-2 mt-4 self-center cursor-pointer hover:text-teal-600' onClick={fetchComments}>Show more</button>}
+          {showMore && <button className=' bg-gray-100 dark:bg-gray-800 w-full text-teal-500 px-4 py-2 mt-4 self-center cursor-pointer hover:text-teal-600' onClick={fetchComments}>Show more</button>}
         </div>
       ) : (
         <div className="text-center text-gray-500 mt-4">

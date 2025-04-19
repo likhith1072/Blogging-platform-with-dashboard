@@ -117,8 +117,8 @@ export default function Header() {
                             bg-white dark:bg-gray-800 dark:text-gray-400 rounded-md flex-col items-center justify-center hidden group-hover:flex p-2 z-1'>
                              <div className='py-1'>{currentUser.username}</div>
                              <div className='py-1'>{currentUser.email}</div>
-                             <div className='dark:hover:bg-gray-600 hover:bg-gray-300 w-full text-center py-1'><Link to="/dashboard?tab=profile">Profile</Link></div>
-                             <div className='dark:hover:bg-gray-600 hover:bg-gray-300 w-full text-center py-1' onClick={handleSignout}><Link to="/signout">Sign out</Link></div>
+                             <Link to="/dashboard?tab=profile" className='dark:hover:bg-gray-600 hover:bg-gray-300 w-full text-center py-1'>Profile</Link>
+                             <div className='dark:hover:bg-gray-600 hover:bg-gray-300 w-full text-center py-1 cursor-pointer' onClick={handleSignout}><Link to="/signout">Sign out</Link></div>
                             </div>
                              
                             </div>):(<Link to='/signin' className={`${isActive('/signin') && "hidden"}`}>
