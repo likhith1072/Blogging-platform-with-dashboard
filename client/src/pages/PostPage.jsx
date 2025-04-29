@@ -6,9 +6,12 @@ import { lexicalToHtml } from './lexicalToHtml.js';
 import CallToAction from '../components/CallToAction.jsx';
 import CommentSection from '../components/CommentSection.jsx';
 import PostCard from '../components/PostCard.jsx';
+import { useLocation } from 'react-router-dom';
+// import { makeToVoiceflow } from './extension-makeToVoiceflow.js';
 
 export default function PostPage(){
     const {postSlug}=useParams();
+    const location=useLocation();
     const [loading,setLoading]=useState(true);
     const [error,setError]=useState(false);
     const [post,setPost]=useState({});
@@ -37,6 +40,82 @@ export default function PostPage(){
              setPost({ ...data.posts[0], content: contentData });
                     setError(false);
                     setLoading(false);
+  
+                    //but knowledge base upload we can provide just url of the blog post and it will fetch the content from there so we need to deploy first
+                    const apiUrl = 'https://api.voiceflow.com/v1/knowledge-base/docs/upload?maxChunkSize=1000&overwrite=true';
+                    const apiKey = 'VF.DM.680cbcf4f3945a163077cfea.D3y3U8gVss9pXMru'; // <-- replace this with your real Dialog Manager API Key
+                  
+                    try {
+                     const blogContent = lexicalToHtml(contentData); 
+                      const blob = new Blob([blogContent], { type: 'text/plain' });
+                      const file = new File([blob], 'blog-post.txt', { type: 'text/plain' });
+
+                      const formData = new FormData();
+                      formData.append('file', file);
+                      formData.append('metadata', JSON.stringify({ tag: 'blog' }));
+
+
+                      const response = await fetch(apiUrl, {
+                        method: 'POST',
+                        headers: {
+                          'Authorization': apiKey,
+                          'Accept': 'application/json',             
+                        },
+                        body: formData,
+                      });
+                  
+                      if (!response.ok) {
+                        const errorText = await response.text();
+                        console.error('Error response:', errorText);
+                        throw new Error(`Failed to upload blog: ${response.status}`);
+                      }
+                  
+                      const data = await response.json();
+                      console.log('Successfully uploaded blog:', data);
+                      return data;
+                    } catch (error) {
+                      console.error('Error uploading blog to Voiceflow:', error);
+                      throw error;
+                    }
+
+                    
+
+               // Send data to Make webhook
+            //    try {
+            //    const resfrommake=await fetch('https://hook.eu2.make.com/ofasoir5arlqtj4l1dnjtfpr5rssrxn8', {
+            //         method: 'POST',
+            //         headers: { 'Content-Type': 'application/json' },
+            //         body: JSON.stringify({
+            //             blogContent: lexicalToHtml(contentData)
+            //         })
+            //     });
+            //     console.log(resfrommake)
+            // } catch (err) {
+            //     console.error("Failed to send webhook data:", err);
+            // }     
+            // const response = await fetch('https://general-runtime.voiceflow.com/state/user_12345/interaction', {
+            //   method: 'POST',
+            //   headers: {
+            //     'Content-Type': 'application/json',
+            //     'Authorization': `Bearer VF.DM.680cbcf4f3945a163077cfea.D3y3U8gVss9pXMru`,
+            //   },
+            //   body: JSON.stringify({
+            //     "records": [{
+            //       "fields": {
+            //         "blog_content": lexicalToHtml(contentData), // ✅ your blog content passed here
+            //       }
+            //   }],
+            //     request: {
+            //       type: 'launch' // ✅ always launch to start a fresh conversation
+            //     }
+            //   }),
+            // });
+          //   makeToVoiceflow.render({
+          //     trace: { type: 'ext_getMakeData', payload: { name: 'ext_getMakeData' } },
+          //     element: null, 
+          //     blogContent: lexicalToHtml(contentData)
+          // });
+            
                 }
             }catch(error){
                 setError(true);
@@ -62,12 +141,12 @@ export default function PostPage(){
     }
    },[])
 
+
     if(loading) return (
         <div className='flex justify-center items-center min-h-screen w-full'> <FaSpinner
         className="animate-spin text-teal-500"
         size={50} // size in px
       /></div>)
-      console.log(post);
     const contentHtml =
       post  && lexicalToHtml(post.content) ;
     console.log(contentHtml);
@@ -84,6 +163,10 @@ export default function PostPage(){
           <div className='mx-auto p-3  max-w-3xl w-full post-content' dangerouslySetInnerHTML={{__html:post && contentHtml}}
           >
           </div>
+
+                {/* Insert the Voiceflow Widget here  */}
+   
+
           <div className='max-w-4xl mx-auto w-full'>
             <CallToAction/>
           </div>

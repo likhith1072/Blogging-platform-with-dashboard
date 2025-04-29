@@ -41,3 +41,8 @@
  .dark .post-content {
   color:rgba(199, 197, 197, 0.96);
  }
+
+ pre code {
+  display:block;
+  width:100%;
+ }

@@ -7,6 +7,46 @@
   </head>
   <body>
     <div id="root"></div>
+
+    <!-- Add a global script for copy functionality -->
+    <script>
+      function copyCode(button) {
+        const codeBlock = button.closest('.code-block').querySelector('code');
+        const codeText = codeBlock.innerText;
+
+        navigator.clipboard.writeText(codeText).then(() => {
+          button.textContent = "Copied!";
+          setTimeout(() => button.textContent = "Copy", 1500);
+        }).catch(err => {
+          console.error('Error copying code: ', err);
+        });
+      }
+    </script>
+
+    <script type="module">
+  (function(d, t) {
+      var v = d.createElement(t), s = d.getElementsByTagName(t)[0];
+      v.onload = function() {
+        window.voiceflow.chat.load({
+          verify: { projectID: '680c9c550179ce004dd9052e' },
+          url: 'https://general-runtime.voiceflow.com',
+          versionID: 'production',
+      //     assistant: {
+      //   extensions: [
+      //     makeToVoiceflow
+      //     ]
+      // },
+          voice: {
+            url: "https://runtime-api.voiceflow.com"
+          }
+        });
+      }
+      v.src = "https://cdn.voiceflow.com/widget-next/bundle.mjs"; v.type = "text/javascript"; s.parentNode.insertBefore(v, s);
+  })(document, 'script');
+</script>
+
     <script type="module" src="/src/main.jsx"></script>
   </body>
 </html>
+
+

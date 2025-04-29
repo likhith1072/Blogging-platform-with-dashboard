@@ -6,9 +6,12 @@ import { OnChangePlugin } from "@lexical/react/LexicalOnChangePlugin";
 import { HistoryPlugin } from "@lexical/react/LexicalHistoryPlugin";
 import { HeadingNode, QuoteNode } from "@lexical/rich-text";
 import { ListNode, ListItemNode } from "@lexical/list";
-import { LinkNode } from "@lexical/link";
+import {AutoLinkNode, LinkNode} from "@lexical/link";
+import { LinkPlugin } from "@lexical/react/LexicalLinkPlugin";
 import { ParagraphNode, TextNode } from "lexical";
 import ToolbarPlugin from "./ToolbarPlugin";
+import { CodeNode } from "@lexical/code";
+import CleanupEmptyCodePlugin from "./CleanupEmptyCodePlugin";
 
 // ✅ Fallback empty content as stringified JSON
 const EMPTY_CONTENT =
@@ -19,6 +22,12 @@ function CustomEditor({ initialContent,onChange }) {
   const editorConfig = {
     namespace: "MyEditor",
     theme: {
+      code: "bg-gray-100 dark:bg-gray-700 font-mono p-2 rounded text-sm",
+      link: "text-blue-500 hover:underline",
+      text:{
+        underline:"underline",
+        strikethrough: "line-through",
+      },
       paragraph: "mb-4",
       heading: {
         h1: "text-3xl font-bold mb-2",
@@ -36,8 +45,10 @@ function CustomEditor({ initialContent,onChange }) {
       ListNode,
       ListItemNode,
       LinkNode,
+      AutoLinkNode,
       ParagraphNode,
       TextNode,
+      CodeNode,
     ],
     // ✅ Set initial editorState to stringified JSON content
     editorState: initialContent || EMPTY_CONTENT, 
@@ -72,6 +83,8 @@ function CustomEditor({ initialContent,onChange }) {
           <HistoryPlugin />
           {/* ✅ Attach the corrected onChange function */}
           <OnChangePlugin onChange={onChange} />
+          <CleanupEmptyCodePlugin />
+          <LinkPlugin />
         </div>
       </div>
     </LexicalComposer>
