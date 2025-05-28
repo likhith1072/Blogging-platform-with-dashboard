@@ -34,6 +34,7 @@ export default function PostPage(){
                 if(res.ok){
                     setPost(data.posts[0]);
                     setContentLength(data.posts[0].content.length);
+                    const title = data.posts[0].title;
                     const contentData = typeof data.posts[0].content === 'string' 
              ? JSON.parse(data.posts[0].content) 
              : data.posts[0].content;
@@ -46,9 +47,10 @@ export default function PostPage(){
                     const apiKey = 'VF.DM.680cbcf4f3945a163077cfea.D3y3U8gVss9pXMru'; // <-- replace this with your real Dialog Manager API Key
                   
                     try {
+
                      const blogContent = lexicalToHtml(contentData); 
                       const blob = new Blob([blogContent], { type: 'text/plain' });
-                      const file = new File([blob], 'blog-post.txt', { type: 'text/plain' });
+                      const file = new File([blob], `${title}.txt`, { type: 'text/plain' });
 
                       const formData = new FormData();
                       formData.append('file', file);
