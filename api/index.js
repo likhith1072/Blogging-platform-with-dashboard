@@ -26,11 +26,11 @@ app.use(cors({
     credentials: true, // If you plan to send cookies/auth headers
   }));
 
-  app.use((req, res, next) => {
-    res.setHeader('Cross-Origin-Opener-Policy', 'same-origin-allow-popups');
-    res.setHeader('Cross-Origin-Embedder-Policy', 'require-corp'); // Optional but helpful
-    next();
-  });
+  // app.use((req, res, next) => {
+  //   res.setHeader('Cross-Origin-Opener-Policy', 'same-origin-allow-popups');
+  //   res.setHeader('Cross-Origin-Embedder-Policy', 'require-corp'); // Optional but helpful
+  //   next();
+  // });
 
 app.use(express.json());
 app.use(cookieParser());
