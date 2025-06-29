@@ -15,9 +15,14 @@ mongoose.connect(process.env.MONGO).then(()=>{console.log('Connected to mongoDB'
 
 const __dirname = path.resolve();
 const app=express();
+const origin = process.env.NODE_ENV === 'production'
+  ? 'https://blogging-platform-with-dashboard.onrender.com'
+  : 'http://localhost:5173';
 
 app.use(cors({
-    origin: 'http://localhost:5173', // Frontend domain
+    // origin: 'http://localhost:5173', // Frontend domain
+    // origin: 'https://blogging-platform-with-dashboard.onrender.com', // Frontend domain
+    origin,
     credentials: true, // If you plan to send cookies/auth headers
   }));
 

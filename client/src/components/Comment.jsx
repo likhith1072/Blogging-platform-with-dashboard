@@ -25,7 +25,7 @@ const [replies, setReplies] = useState([]);
     useEffect(()=>{
         const getUser =async ()=>{
            try {
-             const res=await fetch(`http://localhost:3000/api/user/${comment.userId}`);
+             const res=await fetch(`/api/user/${comment.userId}`);
              const data=await res.json();
              console.log(data);
              if(res.ok){
@@ -46,7 +46,7 @@ const [replies, setReplies] = useState([]);
     
     const handleSave=async()=>{
       try {
-        const res=await fetch(`http://localhost:3000/api/comment/editComment/${comment._id}`,{
+        const res=await fetch(`/api/comment/editComment/${comment._id}`,{
         method:'PUT',
         headers:{
           'Content-Type':'application/json',
@@ -65,10 +65,10 @@ const [replies, setReplies] = useState([]);
 
      const fetchReplies = async () => {
       try {
-        const res = await fetch(`http://localhost:3000/api/comment/getReplies/${comment._id}`);
+        const res = await fetch(`/api/comment/getReplies/${comment._id}`);
         const data = await res.json();
         if (res.ok) {
-          setReplies(data);
+          setReplies(data); 
           setNoOfReplies(data.length);
         }
       } catch (error) {
@@ -78,7 +78,7 @@ const [replies, setReplies] = useState([]);
 
     const handleReplySave = async () => {
       try {
-        const res = await fetch('http://localhost:3000/api/comment/create', {
+        const res = await fetch('/api/comment/create', {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
           credentials: 'include',
@@ -120,7 +120,7 @@ const [replies, setReplies] = useState([]);
           navigate('/sign-in');
           return;
         }
-        const res=await fetch(`http://localhost:3000/api/comment/deleteComment/${commentToDelete._id}`,{
+        const res=await fetch(`/api/comment/deleteComment/${commentToDelete._id}`,{
           method:'DELETE',
           credentials:'include',
         });
@@ -142,7 +142,7 @@ const [replies, setReplies] = useState([]);
          navigate('/sign-in');
          return;
        }
-       const res=await fetch(`http://localhost:3000/api/comment/likeComment/${commentId}`,{
+       const res=await fetch(`/api/comment/likeComment/${commentId}`,{
          method:'PUT',
          credentials:'include', 
        });

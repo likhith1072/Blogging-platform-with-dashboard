@@ -61,7 +61,7 @@ const VerifyEmail=()=> {
         if(isNaN(otp)){
           return toast.error('Please enter a valid OTP.');
         }
-        const res=await fetch('http://localhost:3000/api/auth/verify-account',{method:'POST',
+        const res=await fetch('/api/auth/verify-account',{method:'POST',
             headers:{
               'Content-Type':
               'application/json',

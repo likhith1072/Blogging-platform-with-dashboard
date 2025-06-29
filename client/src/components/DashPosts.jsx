@@ -23,7 +23,7 @@ export default function DashPosts() {
   const fetchPosts = async () => {
     const startIndex=userPosts.length;
     try{
-      const res=await fetch(`http://localhost:3000/api/post/getposts?userId=${currentUser._id}&startIndex=${startIndex}`);
+      const res=await fetch(`/api/post/getposts?userId=${currentUser._id}&startIndex=${startIndex}`);
       const data=await res.json();
       if(res.ok){
         setUserPosts((prev)=>[...prev,...data.posts]); //we directly assigned data.posts to setUserPosts because we know data.posts is an array
@@ -41,7 +41,7 @@ export default function DashPosts() {
   const handleDeletePost=async()=>{
      setShowModal(false);
      try {
-      const res=await fetch(`http://localhost:3000/api/post/deletepost/${postIdToDelete}/${currentUser._id}`,{
+      const res=await fetch(`/api/post/deletepost/${postIdToDelete}/${currentUser._id}`,{
         method:'DELETE',
         credentials: 'include',
       });

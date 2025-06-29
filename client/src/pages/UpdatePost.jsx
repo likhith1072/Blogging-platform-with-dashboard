@@ -37,7 +37,7 @@ export default function UpdatePost() {
     setLoading(true);
     try {
       const res = await fetch(
-        `http://localhost:3000/api/post/getposts?postId=${postId}`
+        `/api/post/getposts?postId=${postId}`
       );
       const data = await res.json();
 
@@ -134,7 +134,7 @@ export default function UpdatePost() {
    
     try {
         const res = await fetch(
-        `http://localhost:3000/api/post/updatepost/${postId}/${currentUser._id}`,
+        `/api/post/updatepost/${postId}/${currentUser._id}`,
         {
           method: "PUT",
           headers: {

@@ -60,7 +60,7 @@ const ResetPassword = () => {
         }
         try {
             setLoading(true);
-            const res=await fetch('http://localhost:3000/api/auth/send-reset-otp',{
+            const res=await fetch('/api/auth/send-reset-otp',{
                 method:'POST',
                 headers:{
                     'Content-Type':
@@ -95,7 +95,7 @@ const ResetPassword = () => {
         }
         try {
             setLoading(true);
-            const res=await fetch('http://localhost:3000/api/auth/reset-password',{
+            const res=await fetch('/api/auth/reset-password',{
                 method:'POST',
                 headers:{
                     'Content-Type':

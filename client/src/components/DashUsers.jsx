@@ -22,7 +22,7 @@ export default function DashUsers() {
   const fetchUsers = async () => {
     const startIndex=users.length;
     try{
-      const res=await fetch(`http://localhost:3000/api/user/getusers?startIndex=${startIndex}`,{
+      const res=await fetch(`/api/user/getusers?startIndex=${startIndex}`,{
         method:'GET',
         credentials: 'include',
       });
@@ -42,7 +42,7 @@ export default function DashUsers() {
 
     const handleDeleteUser = async () => {
         try {
-            const res = await fetch(`http://localhost:3000/api/user/delete/${userIdToDelete}`, {
+            const res = await fetch(`/api/user/delete/${userIdToDelete}`, {
                 method: 'DELETE',
                 credentials: 'include',
             });

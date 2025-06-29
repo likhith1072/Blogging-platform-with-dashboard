@@ -21,7 +21,7 @@ export default function CommentSection({postId}) {
       return;
     }
     try {
-      const res=await fetch('http://localhost:3000/api/comment/create',{
+      const res=await fetch('/api/comment/create',{
         method:'POST',
         headers:{
           'Content-Type':'application/json',
@@ -43,7 +43,7 @@ export default function CommentSection({postId}) {
   useEffect(()=>{
    const getComments=async()=>{
     try {
-      const res=await fetch(`http://localhost:3000/api/comment/getPostComments/${postId}`);
+      const res=await fetch(`/api/comment/getPostComments/${postId}`);
       if(res.ok){
         const data=await res.json();
         setComments(data);    
@@ -62,7 +62,7 @@ export default function CommentSection({postId}) {
       navigate('/sign-in');
       return;
     }
-    const res=await fetch(`http://localhost:3000/api/comment/likeComment/${commentId}`,{
+    const res=await fetch(`/api/comment/likeComment/${commentId}`,{
       method:'PUT',
       credentials:'include', 
     });
@@ -92,7 +92,7 @@ export default function CommentSection({postId}) {
         navigate('/sign-in');
         return;
       }
-      const res=await fetch(`http://localhost:3000/api/comment/deleteComment/${commentToDelete._id}`,{
+      const res=await fetch(`/api/comment/deleteComment/${commentToDelete._id}`,{
         method:'DELETE',
         credentials:'include',
       });

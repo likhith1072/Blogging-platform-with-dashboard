@@ -25,7 +25,7 @@ export default function SignUp() {
     try{
       setLoading(true);
       setErrorMessage(null);
-      const res=await fetch('http://localhost:3000/api/auth/signup',{
+      const res=await fetch('/api/auth/signup',{
         method:'POST',
         headers:{
           'Content-Type':
@@ -42,7 +42,7 @@ export default function SignUp() {
       }
       
       if(res.ok){
-        const re=await fetch('http://localhost:3000/api/auth/send-verify-otp',{
+        const re=await fetch('/api/auth/send-verify-otp',{
           method:'POST',
           headers:{
             'Content-Type':
