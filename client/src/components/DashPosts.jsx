@@ -18,7 +18,7 @@ export default function DashPosts() {
       fetchPosts();
     }
   }, [currentUser._id]);
- console.log(userPosts.length)
+//  console.log(userPosts.length)
 
   const fetchPosts = async () => {
     const startIndex=userPosts.length;

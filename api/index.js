@@ -22,7 +22,7 @@ const origin = process.env.NODE_ENV === 'production'
 app.use(cors({
     // origin: 'http://localhost:5173', // Frontend domain
     // origin: 'https://blogging-platform-with-dashboard.onrender.com', // Frontend domain
-    origin,
+    origin:origin,
     credentials: true, // If you plan to send cookies/auth headers
   }));
 

@@ -68,13 +68,13 @@ export default function CreatePost() {
 
   // Handle Lexical Editor content change
   const handleEditorChange = (editorState) => {
-    console.log(JSON.stringify(editorState));
+    // console.log(JSON.stringify(editorState));
     setFormData({ ...formData, content: JSON.stringify(editorState) });
   };
 
   const handleSubmit = async(e) => {
     e.preventDefault();
-    console.log(formData.content);
+    // console.log(formData.content);
     try{
       const res=await fetch("/api/post/create",{
       method:"POST",

@@ -15,7 +15,7 @@ export default function Search() {
     const [posts,setPosts]=useState([]);
     const [loading,setLoading]=useState(false);
     const [showMore,setShowMore]=useState(false);
-     console.log('sidebarData:',sidebarData);
+    //  console.log('sidebarData:',sidebarData);
     useEffect(()=>{
       const urlParams=new URLSearchParams(location.search);
       const searchTermFromUrl=urlParams.get('searchTerm');
