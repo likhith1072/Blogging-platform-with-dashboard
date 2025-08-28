@@ -27,10 +27,10 @@ const [replies, setReplies] = useState([]);
            try {
              const res=await fetch(`/api/user/${comment.userId}`);
              const data=await res.json();
-             console.log(data);
+            //  console.log(data);
              if(res.ok){
                 setUser(data);
-                console.log(data);
+                //  console.log(data);
             }
            } catch (error) {
             console.log(error.message);      

@@ -14,6 +14,8 @@ import { useLexicalComposerContext } from "@lexical/react/LexicalComposerContext
 import { $createHeadingNode } from "@lexical/rich-text";
 import { TOGGLE_LINK_COMMAND } from "@lexical/link";
 import { $createCodeNode } from '@lexical/code';
+import { toast } from 'react-toastify';
+
 
 export default function ToolbarPlugin() {
   const [editor] = useLexicalComposerContext();
@@ -86,12 +88,13 @@ export default function ToolbarPlugin() {
         if ($isRangeSelection(selection) && !selection.isCollapsed()) {
           // Apply the link to the selected text
           editor.dispatchCommand(TOGGLE_LINK_COMMAND, { url });
-          console.log("Link applied!");
+          // console.log("Link applied!");
+          toast.success("Link applied!");
 
           setUrl("");
           setShowLinkModal(false);
         } else {
-          alert("Please select some text to add a link.");
+          toast.error("Please select some text to add a link.");
         }
       });
     }
