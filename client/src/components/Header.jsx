@@ -24,7 +24,6 @@ export default function Header() {
     const links = [
         { name: "Home", to: "/" },
         { name: "About", to: "/about" },
-        { name: "Projects", to: "/projects" }
     ];
   
     useEffect(()=>{
@@ -118,7 +117,7 @@ export default function Header() {
                              <div className='py-1'>{currentUser.username}</div>
                              <div className='py-1'>{currentUser.email}</div>
                              <Link to="/dashboard?tab=profile" className='dark:hover:bg-gray-600 hover:bg-gray-300 w-full text-center py-1'>Profile</Link>
-                             <div className='dark:hover:bg-gray-600 hover:bg-gray-300 w-full text-center py-1 cursor-pointer' onClick={handleSignout}><Link to="/signout">Sign out</Link></div>
+                             <div className='dark:hover:bg-gray-600 hover:bg-gray-300 w-full text-center py-1 cursor-pointer' onClick={handleSignout}><Link to="/signin">Sign out</Link></div>
                             </div>
                              
                             </div>):(<Link to='/signin' className={`${isActive('/signin') && "hidden"}`}>

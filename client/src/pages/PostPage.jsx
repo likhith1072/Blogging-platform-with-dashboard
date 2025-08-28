@@ -3,7 +3,6 @@ import {useEffect,useState} from 'react'
 import { FaSpinner } from "react-icons/fa";
 import {Link} from 'react-router-dom';
 import { lexicalToHtml } from './lexicalToHtml.js';
-import CallToAction from '../components/CallToAction.jsx';
 import CommentSection from '../components/CommentSection.jsx';
 import PostCard from '../components/PostCard.jsx';
 import { useLocation } from 'react-router-dom';
@@ -169,9 +168,7 @@ export default function PostPage(){
                 {/* Insert the Voiceflow Widget here  */}
    
 
-          <div className='max-w-4xl mx-auto w-full'>
-            <CallToAction/>
-          </div>
+         
           <CommentSection postId={post._id}/>
 
           <div className='flex flex-col justify-center items-center mb-5'>

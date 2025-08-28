@@ -1,6 +1,6 @@
 // src/components/ToolbarPlugin.jsx
 import React from "react";
-import {useState,useEffect} from "react";
+import { useState, useEffect } from "react";
 import {
   FORMAT_TEXT_COMMAND,
   FORMAT_ELEMENT_COMMAND,
@@ -30,14 +30,15 @@ export default function ToolbarPlugin() {
         console.warn("Cannot insert heading with active selection.");
         return;
       }
-      const root = $getRoot();
-      const headingNode = $createHeadingNode(tag);
-      root.append(headingNode);
-      headingNode.select();
+      if ($isRangeSelection(selection)) {
+        const headingNode = $createHeadingNode(tag);
+        selection.insertNodes([headingNode]);
+        headingNode.select(); // Move cursor into the heading block
+      }
     });
   };
 
-  
+
   // const insertCodeBlock = () => {
   //   editor.update(() => {
   //     const selection = $getSelection();
@@ -52,12 +53,23 @@ export default function ToolbarPlugin() {
   //   });
   // };
   const insertCodeBlock = () => {
+    editor.update(() => {
+      const selection = $getSelection();
+      if ($isRangeSelection(selection)) {
+        const codeNode = $createCodeNode(); // Create a code block node
+        selection.insertNodes([codeNode]);
+        codeNode.select(); // Move cursor into the code block
+      }
+    });
+  };
+
+  const insertTextBlock = () => {
   editor.update(() => {
     const selection = $getSelection();
     if ($isRangeSelection(selection)) {
-      const codeNode = $createCodeNode(); // Create a code block node
-      selection.insertNodes([codeNode]);
-      codeNode.select(); // Move cursor into the code block
+      const paragraphNode = $createParagraphNode();
+      selection.insertNodes([paragraphNode]);
+      paragraphNode.select();
     }
   });
 };
@@ -73,7 +85,7 @@ export default function ToolbarPlugin() {
         const selection = $getSelection();
         if ($isRangeSelection(selection) && !selection.isCollapsed()) {
           // Apply the link to the selected text
-          editor.dispatchCommand(TOGGLE_LINK_COMMAND,{url});
+          editor.dispatchCommand(TOGGLE_LINK_COMMAND, { url });
           console.log("Link applied!");
 
           setUrl("");
@@ -95,7 +107,7 @@ export default function ToolbarPlugin() {
       }
     });
   };
-  
+
 
   return (
     <div className="flex flex-wrap gap-2 mb-4 bg-gray-100 dark:bg-gray-800 p-2 rounded-md shadow-sm">
@@ -160,14 +172,24 @@ export default function ToolbarPlugin() {
         H3
       </button>
 
-        {/* ✅ Code Block */}
-        <button
+      {/* ✅ Code Block */}
+      <button
         onClick={() => insertCodeBlock()}
         type="button"
         className="btn-toolbar"
         title="Insert Code Block"
       >
-        &#x1F4C8; 
+        &#x1F4C8;
+      </button>
+
+      {/* Normal Text Button */}
+      <button
+        onClick={insertTextBlock}
+        type="button"
+        className="btn-toolbar"
+        title="Switch to Normal Text"
+      >
+        T
       </button>
 
       {/* ✅ Text Alignment */}

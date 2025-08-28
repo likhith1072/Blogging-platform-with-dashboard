@@ -82,4 +82,3 @@ export const lexicalToHtml = (lexicalData) => {
   
     return lexicalData.root.children.map(nodeToHtml).join('');
   };
-  
