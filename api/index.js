@@ -17,6 +17,7 @@ mongoose.connect(process.env.MONGO).then(()=>{console.log('Connected to mongoDB'
 // A more reliable way to get __dirname in a modern ES module environment
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
+const projectRoot = path.resolve(__dirname, '..');
 
 const app=express();
 const origin = process.env.NODE_ENV === 'production'
@@ -50,10 +51,10 @@ app.use('/api/auth',authRoutes);
 app.use('/api/post',postRoutes);
 app.use('/api/comment',commentRoutes);
 
-app.use(express.static(path.join(__dirname, '/client/dist')));
+app.use(express.static(path.join(projectRoot, '/client/dist')));
 
 app.get('*', (req, res) => { 
-  res.sendFile(path.join(__dirname, 'client','dist','index.html'));
+  res.sendFile(path.join(projectRoot, 'client','dist','index.html'));
 });
 
 app.use((err,req,res,next)=>{
