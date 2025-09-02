@@ -128,6 +128,9 @@ export default function CreatePost() {
             <option value="nextjs">Nextjs</option>
             <option value="Nodejs">Nodejs</option>
             <option value="tailwindcss">Tailwindcss</option>
+            <option value="GeneralTopic">GeneralTopic</option>
+            <option value="Educational">Educational</option>
+            <option value="Entertainment">Entertainment</option>
           </select>
         </div>
 

@@ -8,12 +8,16 @@ import commentRoutes from './routes/comment.route.js';
 import cors from 'cors';
 import cookieParser from 'cookie-parser';
 import path from 'path';
+import { fileURLToPath } from 'url';
 
 dotenv.config();
 
 mongoose.connect(process.env.MONGO).then(()=>{console.log('Connected to mongoDB');}).catch((err)=>{console.log(err);}); 
 
-const __dirname = path.resolve();
+// A more reliable way to get __dirname in a modern ES module environment
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
+
 const app=express();
 const origin = process.env.NODE_ENV === 'production'
   ? 'https://blogging-platform-with-dashboard.onrender.com'
@@ -48,7 +52,7 @@ app.use('/api/comment',commentRoutes);
 
 app.use(express.static(path.join(__dirname, '/client/dist')));
 
-app.get('/*splat', (req, res) => { 
+app.get('*', (req, res) => { 
   res.sendFile(path.join(__dirname, 'client','dist','index.html'));
 });
 
