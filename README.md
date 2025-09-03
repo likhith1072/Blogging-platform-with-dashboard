@@ -23,7 +23,7 @@ This project demonstrates secure backend APIs, a modern frontend, and a scalable
 ---
 
 ## 📂 Project Structure  
-
+```
 MERN-BLOG/
 ├── api/ # Backend (Express + MongoDB)
 │ ├── config/ # DB configuration
@@ -47,6 +47,7 @@ MERN-BLOG/
 │
 ├── package.json
 └── README.md
+```
 
 
 ---
