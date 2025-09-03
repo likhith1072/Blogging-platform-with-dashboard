@@ -67,31 +67,41 @@ MERN-BLOG/
 ## 📦 Installation  
 
 Clone the repository:  
-
+```
 git clone https://github.com/likhith1072/Blogging-platform-with-dashboard.git
 cd Blogging-platform-with-dashboard
+```
 
 🔧 Backend Setup
+```
   npm install
+```
 
 Create a .env file and add:
+```
 MONGO=<your-mongodb-connection-uri> ,
 JWT_SECRET=<your-secret>,
 NODE_ENV='development',
 SMTP_USER=Your smtp username
 SMTP_PASS=YOur smtp_pass,
 SENDER_EMAIL=Your email id from which you send email to user for verifcation of otp
+```
 
 create .env in frontend inside client:
+```
 VITE_FIREBASE_API_KEY=Your vite firebase api key which is used for image uploading and getting url of images to display and saved in mongodb and for Google Auth
-
+```
 Start the backend server:
+```
 npm run dev
+```
 
 🎨 Frontend Setup
+```
 cd client
 npm install
 npm run dev
+```
 
 🌐 Deployment
 
