@@ -6,6 +6,15 @@ This project demonstrates secure backend APIs, a modern frontend, and a scalable
 
 🌐 **Live Demo**: [Blogging Platform](https://blogging-platform-with-dashboard.onrender.com/)  
 ---
+## Demo Admin Login
+
+You can log in as an **Admin** to explore the dashboard and post creation features.  
+Use the following demo credentials:
+
+- **Email:** DemoAdmin123@gmail.com 
+- **Password:** Demo@123  
+
+👉 Please note: This is only a demo account.  
 
 ## 🚀 Features  
 
