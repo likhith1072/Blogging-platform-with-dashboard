@@ -59,7 +59,7 @@ export default function CommentSection({postId}) {
  const handleLike =async(commentId)=>{
    try {
     if(!currentUser){
-      navigate('/sign-in');
+      navigate('/signin');
       return;
     }
     const res=await fetch(`/api/comment/likeComment/${commentId}`,{
@@ -89,7 +89,7 @@ export default function CommentSection({postId}) {
     setShowModal(false);
     try {
       if(!currentUser){
-        navigate('/sign-in');
+        navigate('/signin');
         return;
       }
       const res=await fetch(`/api/comment/deleteComment/${commentToDelete._id}`,{
@@ -127,7 +127,7 @@ export default function CommentSection({postId}) {
       (
         <div className="comment-section flex gap-2 text-sm text-teal-500 my-5">
           <p>Sign in to leave a comment.</p>
-          <Link to="/sign-in" className='text-blue-500 hover:underline'>Sign In</Link>
+          <Link to="/signin" className='text-blue-500 hover:underline'>Sign In</Link>
         </div>
       )}
       {currentUser && (
