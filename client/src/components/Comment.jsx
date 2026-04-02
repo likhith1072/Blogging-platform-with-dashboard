@@ -117,7 +117,7 @@ const [replies, setReplies] = useState([]);
           setShowModal(false);
         try {
         if(!currentUser){
-          navigate('/sign-in');
+          navigate('/signin');
           return;
         }
         const res=await fetch(`/api/comment/deleteComment/${commentToDelete._id}`,{
@@ -139,7 +139,7 @@ const [replies, setReplies] = useState([]);
     const handleLike =async(commentId)=>{
       try {
        if(!currentUser){
-         navigate('/sign-in');
+         navigate('/signin');
          return;
        }
        const res=await fetch(`/api/comment/likeComment/${commentId}`,{
