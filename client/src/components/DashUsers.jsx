@@ -78,7 +78,7 @@ export default function DashUsers() {
                 <th className="border border-gray-300 px-4 py-2 text-left">Username</th>
                 <th className="border border-gray-300 px-4 py-2 text-left">Email</th>
                 <th className="border border-gray-300 px-4 py-2 text-left">Admin</th>
-                <th className="border border-gray-300 px-4 py-2 text-left">Delete</th>
+                {/* <th className="border border-gray-300 px-4 py-2 text-left">Delete</th> */}
 
               </tr>
             </thead>
@@ -103,9 +103,9 @@ export default function DashUsers() {
                     {user.email}
                     </td>
                   <td className="border border-gray-300 px-4 py-2">{user.isAdmin ?(<FaCheck className="text-green-500"/>):(<FaTimes className="text-red-500"/>) }</td>
-                  <td className="border border-gray-300 px-4 py-2 text-red-500 cursor-pointer"><span className='hover:underline' onClick={()=>{setShowModal(true);
+                  {/* <td className="border border-gray-300 px-4 py-2 text-red-500 cursor-pointer"><span className='hover:underline' onClick={()=>{setShowModal(true);
                     setUserIdToDelete(user._id);
-                  }}>Delete</span></td>
+                  }}>Delete</span></td> */}
                   
                 </tr>
               ))}
