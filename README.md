@@ -17,9 +17,9 @@ Use the following demo credentials:
 For Creating new posts, Go to profile->select Create a post.
 You can monitor your posts, comments and users
 
-👉 Please note: This is only a demo account.  
+👉 Please note: This is only a demo account for Admin.  
 
-👉 For Experiencing how Authentication works signup with you email instead of Demo login credientials.
+👉 For Experiencing General Users(non Admin) Features and how Authentication works, signup with you email instead of Demo login credientials.
 
 ## 🚀 Features  
 
