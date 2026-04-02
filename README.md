@@ -14,12 +14,16 @@ Use the following demo credentials:
 - **Email:** DemoAdmin123@gmail.com 
 - **Password:** Demo@123  
 
+For Creating new posts, Go to profile->select Create a post.
+You can monitor your posts, comments and users
+
 👉 Please note: This is only a demo account.  
+For Experiencing how Authentication works signup with you email instead of Demo login credientials.
 
 ## 🚀 Features  
 
 - ✍️ **Create, Read, Update, Delete (CRUD) Blogs**  
-- 🔑 **User Authentication** with JWT & bcryptjs
+- 🔑 **User Authentication** with JWT & bcryptjs, Email OTP verification.
 - 📝 **Rich Text Editing** with **Lexical Editor**
 - 🌓 **Dark/Light Mode** theme switching
 - 📨 **Email Notifications** using Nodemailer  
