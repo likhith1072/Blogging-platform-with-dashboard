@@ -16,6 +16,7 @@ export default function Search() {
     const [loading,setLoading]=useState(false);
     const [showMore,setShowMore]=useState(false);
     //  console.log('sidebarData:',sidebarData);
+
     useEffect(()=>{
       const urlParams=new URLSearchParams(location.search);
       const searchTermFromUrl=urlParams.get('searchTerm');
@@ -119,9 +120,14 @@ export default function Search() {
                 <label className='font-semibold whitespace-nowrap' htmlFor="category">Category:</label>
                  <select className='border px-2 py-1 border-gray-600 rounded-sm bg-gray-100 text-black' id="category" value={sidebarData.category} onChange={handleChange}>
                     <option value="uncategorized">Uncategorized</option>
-                    <option value="reactjs">React.js</option>
-                    <option value="nextjs">Next.js</option>
-                    <option value="javascript">JavaScript</option>
+                    <option value="javascript">Javascript</option>
+                    <option value="reactjs">Reactjs</option>
+                    <option value="nextjs">Nextjs</option>
+                    <option value="Nodejs">Nodejs</option>
+                    <option value="tailwindcss">Tailwindcss</option>
+                    <option value="GeneralTopic">GeneralTopic</option>
+                    <option value="Educational">Educational</option>
+                    <option value="Entertainment">Entertainment</option>
                     </select>
                 </div>
                 <button type='submit' className='border cursor-pointer border-gray-600 rounded-sm bg-gradient-to-r from-violet-500 to-pink-400 hover:from-violet-600 hover:to-pink-500 text-black px-3 py-1 mx-auto '>Apply Filters</button>
