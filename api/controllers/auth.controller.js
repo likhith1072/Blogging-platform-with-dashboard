@@ -71,8 +71,6 @@ export const signin=async (req,res,next)=>{
         
         res.status(200).cookie('access_token',token,{
           httpOnly:true,
-        //    secure: false, // true if using HTTPS
-        //   sameSite: 'lax',path:'/',
         secure: process.env.NODE_ENV === 'production', 
         sameSite: process.env.NODE_ENV === 'production' && 'none',
         maxAge: 24 * 60 * 60 * 1000,
