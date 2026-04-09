@@ -11,12 +11,13 @@ export const updateUser = async (req,res,next)=>{
    if(req.user.id !== req.params.userId){
       return next(errorHandler(403,"Unauthorized"));
    }
-   if(req.body.password){
-    if(req.body.password.length<6){
-        return next(errorHandler(400,"Password must be at least 6 characters"));
-    }
-    req.body.password=bcryptjs.hashSync(req.body.password,5);   
-   };
+
+   // Only allow updating username + profilePicture from this endpoint
+   const allowedUpdates = {};
+   if (typeof req.body.profilePicture === 'string' && req.body.profilePicture.trim()) {
+     allowedUpdates.profilePicture = req.body.profilePicture.trim();
+   }
+
    if(req.body.username){
     if(req.body.username.length<7 || req.body.username.length>20){
         return next(errorHandler(400,"Username must be between 7 and 20 characters"));
@@ -30,14 +31,22 @@ export const updateUser = async (req,res,next)=>{
     if(!req.body.username.match(/^[a-zA-Z0-9]+$/)){
         return next(errorHandler(400,"Username must contain only letters and numbers"));
    }
+    allowedUpdates.username = req.body.username;
 }
+
+   // Explicitly block sensitive fields
+   if (req.body.email || req.body.password) {
+     return next(errorHandler(400, 'Only username and profile photo can be updated'));
+   }
+
+   if (Object.keys(allowedUpdates).length === 0) {
+     return next(errorHandler(400, 'No valid changes were provided'));
+   }
+
 try{
     const updatedUser =await User.findByIdAndUpdate(req.params.userId,{
         $set:{
-            username:req.body.username,
-            email:req.body.email,
-            password:req.body.password,
-            profilePicture:req.body.profilePicture,
+            ...allowedUpdates,
         },
     },{new:true});
     const {password,...rest}=updatedUser._doc;

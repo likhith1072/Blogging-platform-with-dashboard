@@ -78,7 +78,12 @@ export default function DashProfile() {
     e.preventDefault();
     setUpdateUserError(null);
     setUpdateUserSuccess(null);
-    if(Object.keys(formData).length === 0){
+    const filteredFormData = {};
+    if (typeof formData.username === 'string') filteredFormData.username = formData.username;
+    if (typeof formData.profilePicture === 'string')
+      filteredFormData.profilePicture = formData.profilePicture;
+
+    if(Object.keys(filteredFormData).length === 0){
       setUpdateUserError('No changes were made');
       return;
     }
@@ -93,7 +98,7 @@ export default function DashProfile() {
         headers:{
           'Content-Type':'application/json',
         },
-        body:JSON.stringify(formData),
+        body:JSON.stringify(filteredFormData),
         credentials: 'include',
       });
       const data = await res.json();
@@ -182,8 +187,9 @@ const handleSignout=async()=>{
           {imageFileUploadError && <div>{imageFileUploadError}</div>}
         
         <input type="text" id="username" placeholder="username" defaultValue={currentUser.username} className='p-1 border-1 rounded-sm bg-gray-50 dark:bg-gray-800' onChange={handleChange}/>
-        <input type="email" id="email" placeholder="email" defaultValue={currentUser.email}  className='p-1 border-1 rounded-sm bg-gray-50 dark:bg-gray-800' onChange={handleChange}/>
-        <input type="password" id="password" placeholder="password" className='p-1 border-1 rounded-sm bg-gray-50 dark:bg-gray-800'  onChange={handleChange}/>
+        <div className='p-1 border-1 rounded-sm bg-gray-50 dark:bg-gray-800 text-gray-700 dark:text-gray-200'>
+          <span className='font-semibold'>Email:</span> {currentUser.email}
+        </div>
         <button className='bg-gradient-to-r from-purple-400 to-blue-400 hover:from bg-purple-500 hover:to-blue-500 cursor-pointer rounded-sm' type="submit" disabled={loading || imageFileUploading}>{loading ? 'Loading..' : 'Update'}</button>
         {currentUser && currentUser.isAdmin && (
           <Link to='/create-post' className='bg-gradient-to-r from-purple-400 to-blue-400 hover:from bg-purple-500 hover:to-blue-500 rounded-sm'>
