@@ -5,7 +5,7 @@ import {verifyAdmin, verifyToken} from '../utils/verifyUser.js';
 
 router.put('/update/:userId',verifyToken,updateUser);
 router.delete('/delete/:userId',verifyToken,deleteUser);
-router.post('/signout',verifyToken,signout);
+router.post('/signout',signout);
 router.get('/getusers',verifyToken,verifyAdmin,getUsers);
 router.get('/:userId',getUser)
 
