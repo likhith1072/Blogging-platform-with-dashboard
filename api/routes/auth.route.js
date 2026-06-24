@@ -1,6 +1,6 @@
 import express from 'express';
 import {signup,signin,google,sendVerifyOtp,verifyEmail,sendResetOtp,resetPassword} from '../controllers/auth.controller.js';
-import {verifyToken} from '../utils/verifyUser.js';
+
 
 const router=express.Router();
 

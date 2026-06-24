@@ -4,10 +4,11 @@ dotenv.config();
 
 
 const transporter = nodemailer.createTransport({
-    host: "smtp-relay.brevo.com",
-    port: 587,
+    host: process.env.SMTP_HOST || "smtp.gmail.com",
+    port: process.env.SMTP_PORT || 587,
+    secure: process.env.SMTP_PORT == 465, // true for 465, false for 587
     auth: {
-      user:process.env.SMTP_USER,
+      user: process.env.SMTP_USER,
       pass: process.env.SMTP_PASS,
     }
 });
