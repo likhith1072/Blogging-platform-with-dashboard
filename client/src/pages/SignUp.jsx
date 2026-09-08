@@ -111,7 +111,7 @@ export default function SignUp() {
             <span>Have an account?</span>
             <Link to ='/signin' className='text-blue-500 hover:text-blue-700'>Sign In</Link>
             </div>
-            {/* {errorMessage && <div className='text-red-500  bg-red-100 flex justify-center items-center rounded-md w-70 mt-2 p-2'>{errorMessage}</div>} */}
+            {errorMessage && <div className='text-red-500  bg-red-100 flex justify-center items-center rounded-md w-70 mt-2 p-2'>{errorMessage}</div>}
         </div>
       </div>
     </div>
