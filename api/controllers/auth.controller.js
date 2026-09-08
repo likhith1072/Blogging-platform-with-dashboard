@@ -2,7 +2,7 @@ import User from '../models/user.model.js'
 import bcryptjs from 'bcryptjs';
 import {errorHandler} from '../utils/error.js';
 import jwt from 'jsonwebtoken';
-import transporter from '../config/nodemailer.js';
+import { sendEmail } from '../utils/sendEmail.js';
 
 export const signup=async (req,res,next)=>{
    const {username,email,password}=req.body;
@@ -32,14 +32,11 @@ export const signup=async (req,res,next)=>{
 
     res.json({success:true,message:"User created successfully"});  
 
-    const mailOptions={
-      from:process.env.SENDER_EMAIL,
-      to:email,
-      subject:"Welcome to Fusion Blog",
-      text:`Hello ${username},\n\nWelcome to Fusion Blog website.Your account has been created with email id: ${email}.`
-    }
-
-    await transporter.sendMail(mailOptions);
+    sendEmail({
+      to: email,
+      subject: "Welcome to Fusion Blog",
+      text: `Hello ${username},\n\nWelcome to Fusion Blog website.Your account has been created with email id: ${email}.`,
+    }).catch((error) => console.error("Welcome email failed:", error));
   } catch(error){
    next(error);
   }
@@ -121,14 +118,11 @@ export const google=async (req,res,next)=>{
           res.status(200).cookie('access_token',token,{
             httpOnly:true}).json(rest);
 
-            const mailOptions={
-              from:process.env.SENDER_EMAIL,
-              to:newUser.email,
-              subject:"Welcome to Fusion Blog",
-              text:`Hello ${newUser.username},\n\nWelcome to Fusion Blog website.Your account has been created with email id: ${email}.`
-            }
-        
-            await transporter.sendMail(mailOptions);
+            sendEmail({
+              to: newUser.email,
+              subject: "Welcome to Fusion Blog",
+              text: `Hello ${newUser.username},\n\nWelcome to Fusion Blog website.Your account has been created with email id: ${email}.`,
+            }).catch((error) => console.error("Welcome email failed:", error));
         }
     } catch(error){
       next(error);
@@ -142,6 +136,9 @@ export const sendVerifyOtp =async (req,res,next)=>{
     const {email}=req.body;
     
     const user=await User.findOne({email});
+    if(!user){
+      return res.json({success:false,message:"User not found"});
+    }
     if(user.isAccountVerified){
       return res.json({success:false,message:"Account already verified"});
     }
@@ -153,14 +150,11 @@ export const sendVerifyOtp =async (req,res,next)=>{
     
     await user.save();
 
-    const mailOptions={
-      from:process.env.SENDER_EMAIL,
-      to:user.email,
-      subject:"Account Verification OTP",
-      text:`Your OTP for account verification is ${otp}. It is valid for 1 hour.`
-    }
-
-    await transporter.sendMail(mailOptions);
+    await sendEmail({
+      to: user.email,
+      subject: "Account Verification OTP",
+      text: `Your OTP for account verification is ${otp}. It is valid for 1 hour.`,
+    });
     res.json({success:true,message:"OTP send to your email  successfully"});
   } catch (error) {
     next(error);
@@ -227,14 +221,11 @@ export const sendResetOtp =async (req,res,next)=>{
     
     await user.save();
 
-    const mailOptions={
-      from:process.env.SENDER_EMAIL,
-      to:user.email,
-      subject:"Password Reset OTP",
-      text:`Your OTP for resetting your password is ${otp}. It is valid for 1 hour.`
-    }
-
-    await transporter.sendMail(mailOptions);
+    await sendEmail({
+      to: user.email,
+      subject: "Password Reset OTP",
+      text: `Your OTP for resetting your password is ${otp}. It is valid for 1 hour.`,
+    });
     res.json({success:true,message:"OTP send to your email successfully"});
 
   } catch (error){

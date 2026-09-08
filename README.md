@@ -93,13 +93,17 @@ cd Blogging-platform-with-dashboard
 
 Create a .env file and add:
 ```
-MONGO=<your-mongodb-connection-uri> ,
-JWT_SECRET=<your-secret>,
-NODE_ENV='development',
+MONGO=<your-mongodb-connection-uri>
+JWT_SECRET=<your-secret>
+NODE_ENV=development
 SMTP_USER=Your smtp username
-SMTP_PASS=YOur smtp_pass,
-SENDER_EMAIL=Your email id from which you send email to user for verifcation of otp
+SMTP_PASS=Your smtp pass
+SENDER_EMAIL=Your email id from which you send email to user for verification of otp
+# Production (Render free blocks SMTP). HTTPS API on port 443:
+RESEND_API_KEY=re_your_resend_api_key
+RESEND_FROM=Fusion Blog <beth.t@example.com>
 ```
+On Render, set `RESEND_API_KEY` and `RESEND_FROM`. Verify a domain in Resend to send OTP to any address; until then `beth.t@example.com` can only send to the email on your Resend account. Locally, if `RESEND_API_KEY` is unset, Gmail SMTP is used.
 
 create .env in frontend inside client:
 ```
