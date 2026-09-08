@@ -1,12 +1,15 @@
 import nodemailer from 'nodemailer';
 import dotenv from 'dotenv';
-dotenv.config();
+import path from 'path';
+import { fileURLToPath } from 'url';
+const __dirname = path.dirname(fileURLToPath(import.meta.url));
+dotenv.config({ path: path.resolve(__dirname, '../../.env') });
 
 
 const transporter = nodemailer.createTransport({
     host: process.env.SMTP_HOST || "smtp.gmail.com",
-    port: process.env.SMTP_PORT || 587,
-    secure: process.env.SMTP_PORT == 465, // true for 465, false for 587
+    port: Number(process.env.SMTP_PORT || 465),
+    secure: process.env.SMTP_PORT !== '587', // 465 = true, 587 = false
     auth: {
       user: process.env.SMTP_USER,
       pass: process.env.SMTP_PASS,
